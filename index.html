@@ -24,8 +24,8 @@
         
         <!-- Encabezado -->
         <header class="text-center mb-12">
-            <h1 class="text-4xl sm:text-5xl font-bold text-cyan-400">Flujo de Escenas del Videojuego</h1>
-            <p class="text-lg text-gray-400 mt-2">Una visualización del flujo de navegación basado en tu boceto.</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-cyan-400">Flujo de Escenas de "CUNUEN"</h1>
+            <p class="text-lg text-gray-400 mt-2">diagrama de flujo de scenas.</p>
         </header>
 
         <!-- Contenedor de las tarjetas de escenas -->
@@ -34,12 +34,28 @@
             <!-- Escena 0: Autenticación -->
             <div class="scene-card bg-gray-800 rounded-xl p-6 border-2 border-green-500">
                 <h2 class="text-2xl font-semibold text-green-400 mb-4">Escena 0: Autenticación</h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li class="flex items-center">
+                 <ul class="space-y-3 text-gray-300">
+                    <li class="font-semibold">Campos Requeridos:</li>
+                    <li class="flex items-center ml-4">
                         <svg class="w-5 h-5 mr-3 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        <span>Inicio de Sesión / Registro</span>
+                        <span>Nombre de Usuario</span>
                     </li>
-                    <li class="flex items-start">
+                    <li class="flex items-center ml-4">
+                         <svg class="w-5 h-5 mr-3 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <span>Contraseña</span>
+                    </li>
+                    <!-- Botones -->
+                    <li class="pt-2">
+                        <div class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg text-center cursor-pointer transition-colors">
+                            Iniciar Sesión
+                        </div>
+                    </li>
+                    <li>
+                        <div class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg text-center cursor-pointer transition-colors">
+                            Registrarse
+                        </div>
+                    </li>
+                    <li class="flex items-start pt-3 border-t border-gray-700 mt-3">
                         <svg class="w-5 h-5 mr-3 text-cyan-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l4 4m0 0l-4 4m4-4H3"></path></svg>
                         <div>
                             <span class="font-semibold">Navegación:</span>
@@ -155,4 +171,6 @@
     </div>
 </body>
 </html>
+
+
 
