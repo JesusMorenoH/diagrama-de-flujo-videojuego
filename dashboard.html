@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Analíticas - CUNUEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Incluimos Chart.js para los gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <div class="container mx-auto max-w-7xl">
+
+        <!-- Encabezado del Dashboard -->
+        <header class="mb-10">
+            <h1 class="text-4xl font-bold text-cyan-400">Dashboard de Analíticas</h1>
+            <p class="text-lg text-gray-400 mt-1">Métricas de jugadores de "CUNUEN"</p>
+            <div class="mt-4">
+                 <a href="index.html" class="text-indigo-400 hover:text-indigo-300 transition-colors">&larr; Volver al Flujo de Escenas</a>
+            </div>
+        </header>
+
+        <!-- Contenedor Principal -->
+        <main>
+            <!-- Sección de Métricas Clave (KPIs) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <!-- Card: Total de Usuarios -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h2 class="text-sm font-medium text-gray-400">Total de Usuarios</h2>
+                    <p class="text-3xl font-bold text-green-400 mt-2">1,254</p>
+                </div>
+                <!-- Card: Tiempo Promedio de Juego -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h2 class="text-sm font-medium text-gray-400">Tiempo Promedio de Juego</h2>
+                    <p class="text-3xl font-bold text-purple-400 mt-2">48.2 min</p>
+                </div>
+                 <!-- Card: Score Promedio Global -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h2 class="text-sm font-medium text-gray-400">Score Promedio Global</h2>
+                    <p class="text-3xl font-bold text-cyan-400 mt-2">12,850</p>
+                </div>
+                 <!-- Card: Tasa de Completación (Nivel 1) -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h2 class="text-sm font-medium text-gray-400">Tasa de Completación (Nivel 1)</h2>
+                    <p class="text-3xl font-bold text-yellow-400 mt-2">82%</p>
+                </div>
+            </section>
+            
+            <!-- Sección de Detalles y Gráficos -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Tabla de Datos por Usuario -->
+                <div class="lg:col-span-2 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-xl font-semibold text-white mb-4">Detalles por Usuario</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="border-b border-gray-600">
+                                <tr>
+                                    <th class="py-3 pr-4 text-sm font-semibold text-gray-300">Nombre Completo</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-300">Score Promedio</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-300">Tiempo Total</th>
+                                    <th class="py-3 pl-4 text-sm font-semibold text-gray-300">Niveles Completados</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <!-- Filas de datos de ejemplo -->
+                                <tr>
+                                    <td class="py-4 pr-4">Juan Pérez</td>
+                                    <td class="py-4 px-4 text-cyan-400">15,500</td>
+                                    <td class="py-4 px-4">1h 12m</td>
+                                    <td class="py-4 pl-4 text-center">8</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 pr-4">Ana García</td>
+                                    <td class="py-4 px-4 text-cyan-400">21,200</td>
+                                    <td class="py-4 px-4">2h 5m</td>
+                                    <td class="py-4 pl-4 text-center">8</td>
+                                </tr>
+                                 <tr>
+                                    <td class="py-4 pr-4">Carlos Rivas</td>
+                                    <td class="py-4 px-4 text-cyan-400">9,800</td>
+                                    <td class="py-4 px-4">0h 45m</td>
+                                    <td class="py-4 pl-4 text-center">5</td>
+                                </tr>
+                                 <tr>
+                                    <td class="py-4 pr-4">Sofía López</td>
+                                    <td class="py-4 px-4 text-cyan-400">4,300</td>
+                                    <td class="py-4 px-4">0h 25m</td>
+                                    <td class="py-4 pl-4 text-center">3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Tiempo por Nivel -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-xl font-semibold text-white mb-4">Tiempo Promedio por Nivel</h3>
+                    <div>
+                        <canvas id="levelTimeChart"></canvas>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- Lógica para el gráfico con Chart.js ---
+        const ctx = document.getElementById('levelTimeChart').getContext('2d');
+        const levelTimeChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Nivel 1', 'Nivel 2', 'Nivel 3', 'Nivel 4', 'Nivel 5', 'Nivel 6'],
+                datasets: [{
+                    label: 'Tiempo Promedio (minutos)',
+                    data: [5.2, 7.1, 6.5, 9.8, 12.3, 11.5], // Datos de ejemplo
+                    backgroundColor: 'rgba(34, 211, 238, 0.6)', // Color cyan con transparencia
+                    borderColor: 'rgba(34, 211, 238, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false // Ocultamos la leyenda para un look más limpio
+                    },
+                    tooltip: {
+                        backgroundColor: '#1f2937', // bg-gray-800
+                        titleColor: '#e5e7eb', // text-gray-200
+                        bodyColor: '#d1d5db', // text-gray-300
+                        borderColor: '#4b5563', // border-gray-600
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                           color: '#9ca3af' // text-gray-400
+                        },
+                        grid: {
+                            color: 'rgba(75, 85, 99, 0.5)' // border-gray-600
+                        }
+                    },
+                    x: {
+                         ticks: {
+                           color: '#9ca3af' // text-gray-400
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
